@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex, noai, noimageai" />
   <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />
   <meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet" />
@@ -23,6 +23,7 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
@@ -31,17 +32,18 @@
       color: var(--text-main);
       overflow: hidden;
       width: 100vw;
-      height: 100vh;
+      height: 100dvh;
       user-select: none;
     }
 
     /* Miro Dotted Viewport */
     #viewport {
       width: 100vw;
-      height: 100vh;
+      height: 100dvh;
       position: relative;
       overflow: hidden;
       cursor: grab;
+      touch-action: none;
       background-image: radial-gradient(var(--dot-color) 1.5px, transparent 1.5px);
       background-size: 28px 28px;
       background-position: 0px 0px;
@@ -67,8 +69,8 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 6500px;
-      height: 5500px;
+      width: 8500px;
+      height: 7500px;
       pointer-events: none;
       overflow: visible;
     }
@@ -162,7 +164,7 @@
 
     /* Step Main Cards */
     .step-card {
-      width: 410px;
+      width: 420px;
       border-top-width: 6px;
     }
 
@@ -232,8 +234,8 @@
 
     .toggle-btn {
       flex-shrink: 0;
-      width: 28px;
-      height: 28px;
+      width: 30px;
+      height: 30px;
       border-radius: 8px;
       border: 1px solid rgba(15, 23, 42, 0.14);
       background: #ffffff;
@@ -255,7 +257,7 @@
 
     /* Sticky Sub-notes */
     .sticky-note {
-      width: 360px;
+      width: 380px;
       border-radius: 12px;
       padding: 18px 20px;
       border: 1px solid rgba(15, 23, 42, 0.08);
@@ -281,7 +283,7 @@
 
     /* Trucos Hub */
     .trucos-hub {
-      width: 390px;
+      width: 400px;
       background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
       color: #ffffff;
       border: 2px solid #b45309;
@@ -316,33 +318,43 @@
 
     #top-bar {
       position: fixed;
-      top: 16px;
-      left: 16px;
-      right: 16px;
+      top: 14px;
+      left: 14px;
+      right: 14px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 8px;
       pointer-events: none;
       z-index: 100;
     }
 
     .top-badge {
       pointer-events: auto;
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.94);
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       border: 1px solid rgba(15, 23, 42, 0.1);
       box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
       border-radius: 12px;
       padding: 8px 14px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 9px;
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 700;
       color: #0f172a;
+      min-width: 0;
+    }
+
+    .top-badge span:last-child {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .live-dot {
+      flex-shrink: 0;
       width: 8px;
       height: 8px;
       border-radius: 50%;
@@ -350,51 +362,66 @@
       box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
     }
 
-    .zoom-controls {
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
       pointer-events: auto;
-      background: rgba(255, 255, 255, 0.92);
+      flex-shrink: 0;
+    }
+
+    .zoom-controls, .view-switcher {
+      background: rgba(255, 255, 255, 0.94);
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       border: 1px solid rgba(15, 23, 42, 0.1);
       box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06);
       border-radius: 12px;
       padding: 4px;
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 3px;
     }
 
-    .zoom-controls button {
+    .zoom-controls button, .view-switcher button {
       border: none;
       background: transparent;
       color: #334155;
-      font-size: 13px;
-      font-weight: 600;
+      font-size: 12.5px;
+      font-weight: 700;
       padding: 6px 10px;
       border-radius: 8px;
       cursor: pointer;
+      white-space: nowrap;
     }
 
-    .zoom-controls button:hover {
+    .zoom-controls button:hover, .view-switcher button:hover {
       background: #f1f5f9;
       color: #0f172a;
+    }
+
+    .view-switcher button.active {
+      background: #0f172a;
+      color: #ffffff;
     }
 
     #zoom-level {
       font-size: 12px;
       font-weight: 700;
       color: #475569;
-      min-width: 44px;
+      min-width: 42px;
       text-align: center;
     }
 
     /* Bottom Dock */
     #bottom-dock {
       position: fixed;
-      bottom: 18px;
+      bottom: 16px;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.96);
       backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border: 1px solid rgba(15, 23, 42, 0.12);
       box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
       border-radius: 16px;
@@ -403,8 +430,13 @@
       align-items: center;
       gap: 5px;
       z-index: 100;
-      flex-wrap: wrap;
       max-width: 96vw;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    #bottom-dock::-webkit-scrollbar {
+      display: none;
     }
 
     .dock-btn {
@@ -418,6 +450,7 @@
       cursor: pointer;
       transition: all 0.15s ease;
       white-space: nowrap;
+      flex-shrink: 0;
     }
 
     .dock-btn:hover {
@@ -435,6 +468,7 @@
       height: 22px;
       background: #e2e8f0;
       margin: 0 4px;
+      flex-shrink: 0;
     }
 
     #rec-toast {
@@ -442,7 +476,7 @@
       top: 18px;
       left: 50%;
       transform: translateX(-50%);
-      background: rgba(15, 23, 42, 0.88);
+      background: rgba(15, 23, 42, 0.9);
       color: #fff;
       padding: 8px 16px;
       border-radius: 999px;
@@ -452,10 +486,139 @@
       pointer-events: none;
       transition: opacity 0.3s ease;
       z-index: 200;
+      text-align: center;
+      max-width: 92vw;
     }
 
     #rec-toast.show {
       opacity: 1;
+    }
+
+    /* ================= MOBILE / RESPONSIVE FLOW VIEW ================= */
+    body.mobile-flow {
+      overflow-y: auto;
+      overflow-x: hidden;
+      height: auto;
+      min-height: 100dvh;
+      user-select: text;
+      background-image: radial-gradient(var(--dot-color) 1.5px, transparent 1.5px);
+      background-size: 24px 24px;
+    }
+
+    body.mobile-flow #viewport {
+      width: 100%;
+      height: auto;
+      min-height: 100dvh;
+      overflow: visible;
+      cursor: default;
+      touch-action: auto;
+      background: none;
+      padding: 72px 14px 96px 14px;
+    }
+
+    body.mobile-flow #world {
+      position: relative !important;
+      transform: none !important;
+      width: 100%;
+      max-width: 680px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    body.mobile-flow #connectors {
+      display: none !important;
+    }
+
+    body.mobile-flow .node {
+      position: relative !important;
+      left: auto !important;
+      top: auto !important;
+      width: 100% !important;
+      cursor: default;
+      padding: 18px 18px;
+      border-radius: 16px;
+    }
+
+    body.mobile-flow .node-root {
+      padding: 22px 20px;
+      margin-bottom: 6px;
+    }
+
+    body.mobile-flow .node-root h1 {
+      font-size: 19px;
+    }
+
+    body.mobile-flow .node-root p {
+      font-size: 14px;
+    }
+
+    body.mobile-flow .step-card {
+      margin-top: 10px;
+    }
+
+    body.mobile-flow .sticky-note {
+      margin-left: 14px;
+      width: calc(100% - 14px) !important;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+    }
+
+    body.mobile-flow .sticky-note::before {
+      content: "";
+      position: absolute;
+      left: -14px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: #cbd5e1;
+    }
+
+    body.mobile-flow .node.dimmed {
+      opacity: 1 !important;
+    }
+
+    body.mobile-flow .zoom-controls {
+      display: none !important;
+    }
+
+    @media (max-width: 768px) {
+      #top-bar {
+        top: 10px;
+        left: 10px;
+        right: 10px;
+      }
+
+      .top-badge {
+        padding: 7px 11px;
+        font-size: 12px;
+      }
+
+      .zoom-controls button {
+        padding: 6px 8px;
+        font-size: 12px;
+      }
+
+      #zoom-level {
+        min-width: 36px;
+        font-size: 11px;
+      }
+
+      #bottom-dock {
+        bottom: 10px;
+        left: 10px;
+        right: 10px;
+        transform: none;
+        max-width: none;
+        width: calc(100vw - 20px);
+        padding: 6px 8px;
+        border-radius: 14px;
+      }
+
+      .dock-btn {
+        padding: 8px 11px;
+        font-size: 12.5px;
+      }
     }
   </style>
 </head>
@@ -465,18 +628,24 @@
   <div id="top-bar" class="ui-chrome">
     <div class="top-badge">
       <span class="live-dot"></span>
-      <span>Miro Board · Llamadas de Venta Sin Guión</span>
+      <span>Miro · Llamadas Sin Guión</span>
     </div>
-    <div class="zoom-controls">
-      <button onclick="zoomBy(-0.15)" title="Alejar (-)">−</button>
-      <span id="zoom-level">55%</span>
-      <button onclick="zoomBy(0.15)" title="Acercar (+)">+</button>
-      <button onclick="fitAll()" title="Ver todo (Tecla 0)">Ajustar</button>
+    <div class="top-actions">
+      <div class="view-switcher">
+        <button id="btn-mode-board" class="active" onclick="setLayoutMode('board')" title="Lienzo infinito estilo Miro">🗺️ Lienzo</button>
+        <button id="btn-mode-flow" onclick="setLayoutMode('flow')" title="Vista vertical optimizada para móvil">📱 Lectura</button>
+      </div>
+      <div class="zoom-controls">
+        <button onclick="zoomBy(-0.15)" title="Alejar (-)">−</button>
+        <span id="zoom-level">55%</span>
+        <button onclick="zoomBy(0.15)" title="Acercar (+)">+</button>
+        <button onclick="fitAll()" title="Ver todo (Tecla 0)">Ajustar</button>
+      </div>
     </div>
   </div>
 
   <!-- Toast for Recording Mode -->
-  <div id="rec-toast">Modo Grabación activado · Pulsa <strong>H</strong> o <strong>ESC</strong> para volver a ver los controles</div>
+  <div id="rec-toast">Modo Grabación activado · Pulsa <strong>H</strong> o toca la pantalla para volver</div>
 
   <!-- Main Interactive Canvas -->
   <div id="viewport">
@@ -484,14 +653,14 @@
       <svg id="connectors"></svg>
 
       <!-- ROOT NODE -->
-      <div id="node-root" class="node node-root" data-branch="0" style="left: 120px; top: 1950px;">
+      <div id="node-root" class="node node-root" data-branch="0" style="left: 120px; top: 2550px;">
         <span class="badge">Mapa Mental Completo</span>
         <h1>Estructura llamadas de venta para no depender de un guión ni quedarse nunca en blanco</h1>
         <p>Estructura de 7 pasos para ir tranquilos a las llamadas de venta sin pensar en un guión o depender de estar fino ese día. Sólo tienes que hacer bien una cosa y si das con ella, y la venta depende de ti, cierras</p>
       </div>
 
       <!-- ================= PASO 1 ================= -->
-      <div id="step-1" class="node step-card step-1" data-branch="1" style="left: 720px; top: 220px;">
+      <div id="step-1" class="node step-card step-1" data-branch="1" style="left: 780px; top: 320px;">
         <div class="node-header">
           <div>
             <span class="step-pill">Paso 1</span>
@@ -505,35 +674,35 @@
         </div>
       </div>
 
-      <div id="s1-video" class="node sticky-note sticky-blue" data-branch="1" data-parent="1" style="left: 1230px; top: 80px; width: 290px;">
+      <div id="s1-video" class="node sticky-note sticky-blue" data-branch="1" data-parent="1" style="left: 1340px; top: 140px; width: 320px;">
         <span class="sticky-tag">Referencia</span>
         <div class="node-body">
           <p>La conversación mental te la explico en este vídeo de aquí</p>
         </div>
       </div>
 
-      <div id="s1-cm" class="node sticky-note sticky-white" data-branch="1" data-parent="1" style="left: 1230px; top: 250px; width: 350px;">
+      <div id="s1-cm" class="node sticky-note sticky-white" data-branch="1" data-parent="1" style="left: 1340px; top: 360px; width: 370px;">
         <span class="sticky-tag">Conversaciones Mentales Universales</span>
         <div class="node-body">
           <p>Cada persona tiene la suya pero las conversaciones mentales universales normalmente responden a una de estas 3 grandes características. Yo las llamo las conversaciones mentales universales</p>
         </div>
       </div>
 
-      <div id="s1-ego" class="node sticky-note sticky-yellow" data-branch="1" data-parent="1" style="left: 1680px; top: 40px; width: 340px;">
+      <div id="s1-ego" class="node sticky-note sticky-yellow" data-branch="1" data-parent="1" style="left: 1850px; top: 80px; width: 380px;">
         <span class="sticky-tag">1 · Ego</span>
         <div class="node-body">
           <p><strong>Ego:</strong> ya tiene la seguridad cubierta generalmente y busca un legado. Busca sanar traumas, reclamar atención, ser aceptado</p>
         </div>
       </div>
 
-      <div id="s1-seguridad" class="node sticky-note sticky-pink" data-branch="1" data-parent="1" style="left: 1680px; top: 210px; width: 360px;">
+      <div id="s1-seguridad" class="node sticky-note sticky-pink" data-branch="1" data-parent="1" style="left: 1850px; top: 280px; width: 410px;">
         <span class="sticky-tag">2 · Seguridad (La más fuerte)</span>
         <div class="node-body">
           <p><strong>Seguridad.</strong> Es la mas fuerte de todas. Básicamente es el miedo a la pérdida. Cuando alguien no mueve suficientemente el culo es porque está cómodo con su situación actual. Tiene techo, comida, atención suficiente... Cuando esta es la conversación mental la gente compra para evitar el dolor, no para mejorar su situación</p>
         </div>
       </div>
 
-      <div id="s1-compania" class="node sticky-note sticky-green" data-branch="1" data-parent="1" style="left: 1680px; top: 440px; width: 360px;">
+      <div id="s1-compania" class="node sticky-note sticky-green" data-branch="1" data-parent="1" style="left: 1850px; top: 560px; width: 410px;">
         <span class="sticky-tag">3 · Compañía</span>
         <div class="node-body">
           <p><strong>Compañía.</strong> Esta la tiene prácticamente todo el mundo. La necesidad de que alguien te escucha, alguien está pendiente, alguien te pone un látigo encima para que funciones... es muy poderosa. No nos vale la compañía de cualquiera pero la adecuada sí la queremos</p>
@@ -541,7 +710,7 @@
       </div>
 
       <!-- ================= PASO 2 ================= -->
-      <div id="step-2" class="node step-card step-2" data-branch="2" style="left: 720px; top: 730px;">
+      <div id="step-2" class="node step-card step-2" data-branch="2" style="left: 780px; top: 920px;">
         <div class="node-header">
           <div>
             <span class="step-pill">Paso 2</span>
@@ -554,7 +723,7 @@
         </div>
       </div>
 
-      <div id="s2-pareto" class="node sticky-note sticky-green" data-branch="2" data-parent="2" style="left: 1230px; top: 730px; width: 360px;">
+      <div id="s2-pareto" class="node sticky-note sticky-green" data-branch="2" data-parent="2" style="left: 1340px; top: 920px; width: 390px;">
         <span class="sticky-tag">Ley de Pareto en Ventas</span>
         <div class="node-body">
           <p><strong>La mejor forma de hacerlo es usar la ley de pareto que se aplica en ventas. 80-20.</strong> El cliente habla el 80% del tiempo y tú el 20%.</p>
@@ -562,7 +731,7 @@
       </div>
 
       <!-- ================= PASO 3 ================= -->
-      <div id="step-3" class="node step-card step-3" data-branch="3" style="left: 720px; top: 1030px;">
+      <div id="step-3" class="node step-card step-3" data-branch="3" style="left: 780px; top: 1360px;">
         <div class="node-header">
           <div>
             <span class="step-pill">Paso 3</span>
@@ -576,7 +745,7 @@
         </div>
       </div>
 
-      <div id="s3-abiertas" class="node sticky-note sticky-yellow" data-branch="3" data-parent="3" style="left: 1230px; top: 940px; width: 410px;">
+      <div id="s3-abiertas" class="node sticky-note sticky-yellow" data-branch="3" data-parent="3" style="left: 1340px; top: 1280px; width: 420px;">
         <span class="sticky-tag">Preguntas MUY abiertas</span>
         <div class="node-body">
           <p>Es extremadamente sencillo. Sólo tienes que hacer preguntas MUY abiertas. Qué tal todo? Cómo estás ultimamente, te trata la vida bien?</p>
@@ -586,7 +755,7 @@
         </div>
       </div>
 
-      <div id="s3-escalera" class="node sticky-note sticky-orange" data-branch="3" data-parent="3" style="left: 1700px; top: 940px; width: 420px;">
+      <div id="s3-escalera" class="node sticky-note sticky-orange" data-branch="3" data-parent="3" style="left: 1850px; top: 1280px; width: 430px;">
         <span class="sticky-tag">Por qué evitar "la escalera del sí"</span>
         <div class="node-body">
           <p>Verás, cuando tú haces las típicas preguntas de closer a un cliente, super concretas y cerradas para lo que ellos llaman "la escalera del sí", puedes obtener ciertos datos específicos que necesitarás para cerrar pero no encontrarás la CM.</p>
@@ -595,14 +764,14 @@
         </div>
       </div>
 
-      <div id="s3-escucha" class="node sticky-note sticky-white" data-branch="3" data-parent="3" style="left: 2180px; top: 940px; width: 370px;">
+      <div id="s3-escucha" class="node sticky-note sticky-white" data-branch="3" data-parent="3" style="left: 2370px; top: 1280px; width: 390px;">
         <span class="sticky-tag">Cómo escuchar</span>
         <div class="node-body">
           <p>Tremendamente importante aquí que escuches con suma atención. Pero no te quedes con lo que te dice, quédate con cómo te narra los hechos y contrástalos con la situación actual en la que está esa persona. Eso te dirá cómo es realmente esa persona, y será mucho más fácil entender su conversación mental.</p>
         </div>
       </div>
 
-      <div id="s3-apoyo" class="node sticky-note sticky-blue" data-branch="3" data-parent="3" style="left: 2610px; top: 940px; width: 360px;">
+      <div id="s3-apoyo" class="node sticky-note sticky-blue" data-branch="3" data-parent="3" style="left: 2850px; top: 1280px; width: 380px;">
         <span class="sticky-tag">Aterrizar explicaciones</span>
         <div class="node-body">
           <p>Quédate con toda esta info y apóyate en esa para aterrizarle después las explicaciones que quieras darle.</p>
@@ -611,7 +780,7 @@
       </div>
 
       <!-- ================= PASO 4 ================= -->
-      <div id="step-4" class="node step-card step-4" data-branch="4" style="left: 720px; top: 1620px;">
+      <div id="step-4" class="node step-card step-4" data-branch="4" style="left: 780px; top: 2350px;">
         <div class="node-header">
           <div>
             <span class="step-pill">Paso 4</span>
@@ -624,7 +793,7 @@
         </div>
       </div>
 
-      <div id="s4-dato1" class="node sticky-note sticky-pink" data-branch="4" data-parent="4" style="left: 1230px; top: 1410px; width: 450px;">
+      <div id="s4-dato1" class="node sticky-note sticky-pink" data-branch="4" data-parent="4" style="left: 1340px; top: 1920px; width: 470px;">
         <span class="sticky-tag">Dato 1 · Su Pasado</span>
         <div class="node-body">
           <p><strong>Dato 1. Su pasado. Cómo llegó adonde está hoy.</strong></p>
@@ -634,7 +803,7 @@
         </div>
       </div>
 
-      <div id="s4-dato2" class="node sticky-note sticky-yellow" data-branch="4" data-parent="4" style="left: 1230px; top: 1850px; width: 450px;">
+      <div id="s4-dato2" class="node sticky-note sticky-yellow" data-branch="4" data-parent="4" style="left: 1340px; top: 2470px; width: 470px;">
         <span class="sticky-tag">Dato 2 · El Propósito Real</span>
         <div class="node-body">
           <p><strong>Dato 2. El propósito real.</strong> Es decir, el contraste entre el motivo por el que empezó y lo que está haciendo ahora es su verdadero propósito. Si no te cuenta lo que está haciendo ahora y no te ha hecho esa contraposición entre el pasado y el presente le preguntamos para que nos haga esa contraposición.</p>
@@ -643,7 +812,7 @@
         </div>
       </div>
 
-      <div id="s4-dato2-ejemplo" class="node sticky-note sticky-white" data-branch="4" data-parent="4" style="left: 1750px; top: 1760px; width: 470px;">
+      <div id="s4-dato2-ejemplo" class="node sticky-note sticky-white" data-branch="4" data-parent="4" style="left: 1910px; top: 2360px; width: 490px;">
         <span class="sticky-tag">Cómo encontrarlo + Ejemplo práctico</span>
         <div class="node-body">
           <p>Si sabiendo los datos del pasado y del presente aún no lo hemos encontrado, sigue preguntando (preguntas abiertas siempre) hasta que des con ello. Lo necesitas para cerrar la venta.</p>
@@ -654,14 +823,14 @@
         </div>
       </div>
 
-      <div id="s4-bonus" class="node sticky-note sticky-green" data-branch="4" data-parent="4" style="left: 2280px; top: 1850px; width: 350px;">
+      <div id="s4-bonus" class="node sticky-note sticky-green" data-branch="4" data-parent="4" style="left: 2490px; top: 2470px; width: 380px;">
         <span class="sticky-tag">BONUS · Filtro de dinero</span>
         <div class="node-body">
           <p><strong>BONUS:</strong> si haces la pregunta del ejemplo bien formulada puedes conseguir no sólo poner en contraposición la situación actual con el pasado, sino saber si tiene dinero o realmente ha venido a comprar y no a mariposear. Es una de las mejores preguntas de filtro que puedes hacer.</p>
         </div>
       </div>
 
-      <div id="s4-dato3" class="node sticky-note sticky-blue" data-branch="4" data-parent="4" style="left: 1230px; top: 2210px; width: 450px;">
+      <div id="s4-dato3" class="node sticky-note sticky-blue" data-branch="4" data-parent="4" style="left: 1340px; top: 2940px; width: 470px;">
         <span class="sticky-tag">Dato 3 · Responsable y Decisor</span>
         <div class="node-body">
           <p><strong>Dato 3.</strong> Este ya lo sabes pero te lo repito. Quién fue el responsable de su situación. O de quién depende realmente la decisión de compra (si están casados es posible que la pareja o su situación familiar influya, por ejemplo)</p>
@@ -669,7 +838,7 @@
       </div>
 
       <!-- ================= PASO 5 ================= -->
-      <div id="step-5" class="node step-card step-5" data-branch="5" style="left: 720px; top: 2560px;">
+      <div id="step-5" class="node step-card step-5" data-branch="5" style="left: 780px; top: 3440px;">
         <div class="node-header">
           <div>
             <span class="step-pill">Paso 5</span>
@@ -682,21 +851,21 @@
         </div>
       </div>
 
-      <div id="s5-quiere" class="node sticky-note sticky-purple" data-branch="5" data-parent="5" style="left: 1230px; top: 2470px; width: 350px;">
+      <div id="s5-quiere" class="node sticky-note sticky-purple" data-branch="5" data-parent="5" style="left: 1340px; top: 3320px; width: 370px;">
         <span class="sticky-tag">Discurso</span>
         <div class="node-body">
           <p>Lo que dice que hizo o quiere hacer o quiso hacer define <strong>QUIÉN QUIERE SER</strong></p>
         </div>
       </div>
 
-      <div id="s5-es" class="node sticky-note sticky-yellow" data-branch="5" data-parent="5" style="left: 1230px; top: 2630px; width: 350px;">
+      <div id="s5-es" class="node sticky-note sticky-yellow" data-branch="5" data-parent="5" style="left: 1340px; top: 3540px; width: 370px;">
         <span class="sticky-tag">Hechos</span>
         <div class="node-body">
           <p>Lo que realmente hizo y la situación actual a la que llegó define <strong>QUIÉN ES REALMENTE</strong></p>
         </div>
       </div>
 
-      <div id="s5-motivos" class="node sticky-note sticky-white" data-branch="5" data-parent="5" style="left: 1660px; top: 2450px; width: 540px;">
+      <div id="s5-motivos" class="node sticky-note sticky-white" data-branch="5" data-parent="5" style="left: 1810px; top: 3260px; width: 580px;">
         <span class="sticky-tag">Diagnóstico: Qué busca y por qué contrataría</span>
         <div class="node-body">
           <p><strong>Qué busca</strong> (seguridad, ego, compañía....)</p>
@@ -716,7 +885,7 @@
       </div>
 
       <!-- ================= PASO 6 ================= -->
-      <div id="step-6" class="node step-card step-6" data-branch="6" style="left: 720px; top: 3180px;">
+      <div id="step-6" class="node step-card step-6" data-branch="6" style="left: 780px; top: 4380px;">
         <div class="node-header">
           <div>
             <span class="step-pill">Paso 6</span>
@@ -730,12 +899,12 @@
         </div>
       </div>
 
-      <div id="s6-hub" class="node sticky-note sticky-pink" data-branch="6" data-parent="6" style="left: 1230px; top: 3240px; width: 270px;">
+      <div id="s6-hub" class="node sticky-note sticky-pink" data-branch="6" data-parent="6" style="left: 1340px; top: 4460px; width: 280px;">
         <span class="sticky-tag">Filtro y Prevención</span>
         <div class="node-title" style="margin-bottom:0;">Qué preguntas de filtro hago?</div>
       </div>
 
-      <div id="s6-cualif" class="node sticky-note sticky-yellow" data-branch="6" data-parent="6" style="left: 1580px; top: 3070px; width: 450px;">
+      <div id="s6-cualif" class="node sticky-note sticky-yellow" data-branch="6" data-parent="6" style="left: 1720px; top: 4180px; width: 470px;">
         <span class="sticky-tag">1 · Validar Caso de Éxito</span>
         <div class="node-body">
           <p>Los criterios de cualificación para que el cliente <strong>SEA SEGURO un caso de éxito.</strong></p>
@@ -746,7 +915,7 @@
         </div>
       </div>
 
-      <div id="s6-objeciones" class="node sticky-note sticky-orange" data-branch="6" data-parent="6" style="left: 1580px; top: 3420px; width: 450px;">
+      <div id="s6-objeciones" class="node sticky-note sticky-orange" data-branch="6" data-parent="6" style="left: 1720px; top: 4620px; width: 470px;">
         <span class="sticky-tag">2 · Prevenir Objeciones Seguras</span>
         <div class="node-body">
           <p><strong>Y las objeciones que te va a poner seguro.</strong></p>
@@ -757,7 +926,7 @@
       </div>
 
       <!-- ================= PASO 7 ================= -->
-      <div id="step-7" class="node step-card step-7" data-branch="7" style="left: 720px; top: 3820px; width: 560px;">
+      <div id="step-7" class="node step-card step-7" data-branch="7" style="left: 780px; top: 5220px; width: 580px;">
         <div class="node-header">
           <div>
             <span class="step-pill">Paso 7</span>
@@ -774,7 +943,7 @@
       </div>
 
       <!-- ================= TRUCOS EXTRA ================= -->
-      <div id="trucos-hub" class="node trucos-hub" data-branch="T" style="left: 1460px; top: 3920px;">
+      <div id="trucos-hub" class="node trucos-hub" data-branch="T" style="left: 1520px; top: 5340px;">
         <div class="node-header">
           <div>
             <span class="step-pill">Bonus · Aprovechamiento</span>
@@ -787,7 +956,7 @@
         </div>
       </div>
 
-      <div id="truco-1" class="node sticky-note sticky-yellow" data-branch="T" data-parent="T" style="left: 1960px; top: 3760px; width: 380px;">
+      <div id="truco-1" class="node sticky-note sticky-yellow" data-branch="T" data-parent="T" style="left: 2050px; top: 5120px; width: 410px;">
         <span class="sticky-tag">Truco 1</span>
         <div class="node-body">
           <p>Piensa en que la info que están dando te sirve para hacer anuncios. Para crear contenido para redes, para encontrar los ángulos por los que te van a comprar.</p>
@@ -795,7 +964,7 @@
         </div>
       </div>
 
-      <div id="truco-2" class="node sticky-note sticky-blue" data-branch="T" data-parent="T" style="left: 2390px; top: 3760px; width: 390px;">
+      <div id="truco-2" class="node sticky-note sticky-blue" data-branch="T" data-parent="T" style="left: 2540px; top: 5120px; width: 420px;">
         <span class="sticky-tag">Truco 2</span>
         <div class="node-body">
           <p>También todas las cosas que te pasen en las llamadas cuando te dan tanta info de ellos, sus casuísticas y sus conversaciones mentales... te dan emails infinitos.</p>
@@ -804,7 +973,7 @@
         </div>
       </div>
 
-      <div id="truco-3" class="node sticky-note sticky-pink" data-branch="T" data-parent="T" style="left: 1960px; top: 4000px; width: 420px;">
+      <div id="truco-3" class="node sticky-note sticky-pink" data-branch="T" data-parent="T" style="left: 2050px; top: 5410px; width: 450px;">
         <span class="sticky-tag">Truco 3</span>
         <div class="node-body">
           <p>A fuerza de hacer preguntas genuinamente para entender como son y como piensan, te vas a encontrar no solo la conversacion mental, sino tambien las cosas que no les gustan, que les incomodan, las objeciones que te pondrán ellos mismos y otros más adelantes.</p>
@@ -813,7 +982,7 @@
         </div>
       </div>
 
-      <div id="truco-4" class="node sticky-note sticky-green" data-branch="T" data-parent="T" style="left: 2430px; top: 4000px; width: 430px;">
+      <div id="truco-4" class="node sticky-note sticky-green" data-branch="T" data-parent="T" style="left: 2580px; top: 5410px; width: 460px;">
         <span class="sticky-tag">Truco 4 · NotebookLM</span>
         <div class="node-body">
           <p>Titulares, cartas de venta enteras, para una landing, para un VSL, para lo que quieras. En titulares incluyo hooks, asuntos de emails y titulos de videos de YouTube, por ejemplo. Te dan las frases hechas los clientes tal cual, te lo prometo.</p>
@@ -822,7 +991,7 @@
         </div>
       </div>
 
-      <div id="truco-5" class="node sticky-note sticky-orange" data-branch="T" data-parent="T" style="left: 1960px; top: 4360px; width: 900px;">
+      <div id="truco-5" class="node sticky-note sticky-orange" data-branch="T" data-parent="T" style="left: 2050px; top: 5870px; width: 990px;">
         <span class="sticky-tag">Truco 5 · Este es el más gordo</span>
         <div class="node-body">
           <p><strong>Este es el mas gordo.</strong> Los clientes te dan los ángulos para escalar hasta el infinito los anuncios, los enfoques de cada ángulo son las perspectivas de cada cliente. Con esto tienes infinitos anuncios e infinito contenido. <strong>PERO LO GORDO NO ES ESTO.</strong></p>
@@ -906,8 +1075,31 @@
     let activeBranch = '0';
     let focusMode = false;
     let allCollapsed = false;
+    let layoutMode = 'board'; // 'board' | 'flow'
+
+    function isMobileFlow() {
+      return layoutMode === 'flow';
+    }
+
+    function setLayoutMode(mode) {
+      layoutMode = mode;
+      const flow = isMobileFlow();
+      document.body.classList.toggle('mobile-flow', flow);
+      document.getElementById('btn-mode-board').classList.toggle('active', !flow);
+      document.getElementById('btn-mode-flow').classList.toggle('active', flow);
+
+      if (flow) {
+        world.classList.remove('smooth-transition');
+        world.style.transform = 'none';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        drawConnectors();
+        focusBranch(activeBranch);
+      }
+    }
 
     function updateTransform(smooth = false) {
+      if (isMobileFlow()) return;
       if (smooth) {
         world.classList.add('smooth-transition');
       } else {
@@ -920,6 +1112,7 @@
     }
 
     function drawConnectors() {
+      if (isMobileFlow()) return;
       svg.innerHTML = '';
       EDGES.forEach(([fromId, toId, branch]) => {
         const fromEl = document.getElementById(fromId);
@@ -932,7 +1125,7 @@
         const x2 = toEl.offsetLeft;
         const y2 = toEl.offsetTop + toEl.offsetHeight / 2;
 
-        const dx = Math.max(60, Math.abs(x2 - x1) * 0.45);
+        const dx = Math.max(70, Math.abs(x2 - x1) * 0.45);
         const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         path.setAttribute('d', `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`);
         path.classList.add('connector-path');
@@ -949,9 +1142,9 @@
       });
     }
 
-    // Pan & Zoom
+    // Mouse Pan & Zoom
     viewport.addEventListener('mousedown', (e) => {
-      if (e.target.closest('.node')) return;
+      if (isMobileFlow() || e.target.closest('.node')) return;
       isPanning = true;
       viewport.classList.add('grabbing');
       startPanX = e.clientX - panX;
@@ -959,7 +1152,7 @@
     });
 
     window.addEventListener('mousemove', (e) => {
-      if (!isPanning) return;
+      if (!isPanning || isMobileFlow()) return;
       panX = e.clientX - startPanX;
       panY = e.clientY - startPanY;
       updateTransform(false);
@@ -971,13 +1164,14 @@
     });
 
     viewport.addEventListener('wheel', (e) => {
+      if (isMobileFlow()) return;
       e.preventDefault();
       const rect = viewport.getBoundingClientRect();
       const mouseX = e.clientX - rect.left;
       const mouseY = e.clientY - rect.top;
 
       const factor = e.deltaY < 0 ? 1.1 : 0.9;
-      const newScale = Math.min(2.2, Math.max(0.2, scale * factor));
+      const newScale = Math.min(2.2, Math.max(0.15, scale * factor));
 
       panX = mouseX - (mouseX - panX) * (newScale / scale);
       panY = mouseY - (mouseY - panY) * (newScale / scale);
@@ -985,22 +1179,80 @@
       updateTransform(false);
     }, { passive: false });
 
+    // Touch Pan & Pinch-to-Zoom for Mobile/Tablet Canvas Mode
+    let lastTouchDist = null;
+    let lastTouchMid = null;
+    let isTouchPanning = false;
+
+    viewport.addEventListener('touchstart', (e) => {
+      if (isMobileFlow()) return;
+      if (document.body.classList.contains('recording-mode') && e.touches.length === 1) {
+        // Double tap or single tap to restore UI? Let's keep drag working and tap on empty space restore UI
+      }
+      if (e.touches.length === 1) {
+        if (e.target.closest('button')) return;
+        isTouchPanning = true;
+        startPanX = e.touches[0].clientX - panX;
+        startPanY = e.touches[0].clientY - panY;
+        lastTouchDist = null;
+      } else if (e.touches.length === 2) {
+        isTouchPanning = false;
+        const dx = e.touches[0].clientX - e.touches[1].clientX;
+        const dy = e.touches[0].clientY - e.touches[1].clientY;
+        lastTouchDist = Math.hypot(dx, dy);
+        lastTouchMid = {
+          x: (e.touches[0].clientX + e.touches[1].clientX) / 2,
+          y: (e.touches[0].clientY + e.touches[1].clientY) / 2
+        };
+      }
+    }, { passive: true });
+
+    viewport.addEventListener('touchmove', (e) => {
+      if (isMobileFlow()) return;
+      e.preventDefault();
+      if (e.touches.length === 1 && isTouchPanning) {
+        panX = e.touches[0].clientX - startPanX;
+        panY = e.touches[0].clientY - startPanY;
+        updateTransform(false);
+      } else if (e.touches.length === 2 && lastTouchDist) {
+        const dx = e.touches[0].clientX - e.touches[1].clientX;
+        const dy = e.touches[0].clientY - e.touches[1].clientY;
+        const dist = Math.hypot(dx, dy);
+        const midX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
+        const midY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
+
+        const factor = dist / lastTouchDist;
+        const newScale = Math.min(2.2, Math.max(0.15, scale * factor));
+
+        panX = midX - (midX - panX) * (newScale / scale) + (midX - lastTouchMid.x);
+        panY = midY - (midY - panY) * (newScale / scale) + (midY - lastTouchMid.y);
+        scale = newScale;
+        lastTouchDist = dist;
+        lastTouchMid = { x: midX, y: midY };
+        updateTransform(false);
+      }
+    }, { passive: false });
+
+    viewport.addEventListener('touchend', () => {
+      isTouchPanning = false;
+      lastTouchDist = null;
+    });
+
     function zoomBy(delta) {
+      if (isMobileFlow()) return;
       const cx = window.innerWidth / 2;
       const cy = window.innerHeight / 2;
-      const newScale = Math.min(2.2, Math.max(0.2, scale + delta));
+      const newScale = Math.min(2.2, Math.max(0.15, scale + delta));
       panX = cx - (cx - panX) * (newScale / scale);
       panY = cy - (cy - panY) * (newScale / scale);
       scale = newScale;
       updateTransform(true);
     }
 
-    // Draggable Nodes
+    // Draggable Nodes (Desktop Board Mode)
     document.querySelectorAll('.node').forEach((node) => {
       node.addEventListener('mousedown', (e) => {
-        if (e.target.closest('button')) return;
-        // Allow text selection if holding Alt/Option, otherwise drag card
-        if (e.altKey) return;
+        if (isMobileFlow() || e.target.closest('button') || e.altKey) return;
         e.stopPropagation();
         node.classList.add('dragging');
         const startX = e.clientX;
@@ -1029,6 +1281,7 @@
 
     // Camera Framing
     function frameNodes(nodeList) {
+      if (isMobileFlow()) return;
       const visible = nodeList.filter(n => !n.classList.contains('hidden-branch'));
       if (!visible.length) return;
 
@@ -1040,14 +1293,15 @@
         maxY = Math.max(maxY, n.offsetTop + n.offsetHeight);
       });
 
-      const pad = 90;
+      const isSmallScreen = window.innerWidth < 768;
+      const pad = isSmallScreen ? 40 : 100;
       const boxW = (maxX - minX) + pad * 2;
       const boxH = (maxY - minY) + pad * 2;
 
-      const targetScale = Math.min(1.05, Math.max(0.22, Math.min(window.innerWidth / boxW, (window.innerHeight - 60) / boxH)));
+      const targetScale = Math.min(1.05, Math.max(0.15, Math.min(window.innerWidth / boxW, (window.innerHeight - 110) / boxH)));
       scale = targetScale;
       panX = (window.innerWidth - boxW * scale) / 2 - (minX - pad) * scale;
-      panY = (window.innerHeight - boxH * scale) / 2 - (minY - pad) * scale - 12;
+      panY = (window.innerHeight - boxH * scale) / 2 - (minY - pad) * scale - 8;
       updateTransform(true);
     }
 
@@ -1060,6 +1314,20 @@
       document.querySelectorAll('#bottom-dock .dock-btn[data-nav]').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.nav === branch);
       });
+
+      if (isMobileFlow()) {
+        if (branch === '0') {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          const targetId = branch === 'T' ? 'trucos-hub' : `step-${branch}`;
+          const targetEl = document.getElementById(targetId);
+          if (targetEl) {
+            const y = targetEl.getBoundingClientRect().top + window.scrollY - 68;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+          }
+        }
+        return;
+      }
 
       const allNodes = Array.from(document.querySelectorAll('.node'));
       if (branch === '0') {
@@ -1099,7 +1367,7 @@
       btn.textContent = allCollapsed ? '➕ Expandir todo' : '➖ Solo pasos';
       btn.classList.toggle('active', allCollapsed);
       drawConnectors();
-      if (activeBranch === '0') fitAll();
+      if (activeBranch === '0' && !isMobileFlow()) fitAll();
     }
 
     function toggleFocusMode() {
@@ -1118,6 +1386,13 @@
       }
     }
 
+    // Tap anywhere when in recording mode on touch devices to exit recording mode
+    viewport.addEventListener('dblclick', () => {
+      if (document.body.classList.contains('recording-mode')) {
+        document.body.classList.remove('recording-mode');
+      }
+    });
+
     // Keyboard Shortcuts
     window.addEventListener('keydown', (e) => {
       if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
@@ -1135,12 +1410,18 @@
       }
     });
 
-    // Init
+    // Init: auto-select mobile flow view on phones, board view on desktop/tablet
     window.addEventListener('load', () => {
-      drawConnectors();
-      fitAll();
+      if (window.innerWidth <= 768) {
+        setLayoutMode('flow');
+      } else {
+        drawConnectors();
+        fitAll();
+      }
     });
-    window.addEventListener('resize', drawConnectors);
+    window.addEventListener('resize', () => {
+      if (!isMobileFlow()) drawConnectors();
+    });
   </script>
 </body>
 </html>
